@@ -181,7 +181,7 @@ def write_to_bin(in_file_dir, out_file, makevocab=False):
     print("Finished writing vocab file")
 
 # load stories
-directory = 'viet'
+directory = 'vietnews-master/data'
 #stories = load_stories(directory)
 #print('Loaded Stories %d' % len(stories))
 #print(stories[1]['highlights'])
@@ -189,14 +189,10 @@ directory = 'viet'
 #	example['story'] = clean_lines(example['story'].split('\n'), "story")#
 #	example['highlights'] = clean_lines(example['highlights'].split('\n'), "abs")
 
-#print(stories[1]['highlights'])
+if __name__ == '__main__':
+    if not os.path.exists(finished_files_dir): os.makedirs(finished_files_dir)
+    write_to_bin(os.path.join(directory, "val"), os.path.join(finished_files_dir, "val.bin"))
+    write_to_bin(os.path.join(directory, "train"), os.path.join(finished_files_dir, "train.bin"), makevocab=True)
+    write_to_bin(os.path.join(directory, "test"), os.path.join(finished_files_dir, "test.bin"))
 
-if not os.path.exists(finished_files_dir): os.makedirs(finished_files_dir)
-write_to_bin(os.path.join(directory, "val"), os.path.join(finished_files_dir, "val.bin"), makevocab=True)
-write_to_bin(os.path.join(directory, "train"), os.path.join(finished_files_dir, "train.bin"), makevocab=True)
-write_to_bin(os.path.join(directory, "test"), os.path.join(finished_files_dir, "test.bin"), makevocab=True)
-
-#write_to_bin(all_val_urls, os.path.join(finished_files_dir, "val.bin"))
-#write_to_bin(all_train_urls, os.path.join(finished_files_dir, "train.bin"), makevocab=True)
-
-chunk_all()
+    chunk_all()
